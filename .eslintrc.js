@@ -20,5 +20,7 @@ module.exports = {
       ignorePattern: 'd="*?"'
     }],
     "comma-dangle": "off",
+    "no-unused-expressions":"off",
+    "no-plusplus":"off"
   },
 };
