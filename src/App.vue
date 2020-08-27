@@ -2,15 +2,18 @@
   <div id="app">
     <router-view></router-view>
     <navigation></navigation>
+    <navigation-categories></navigation-categories>
   </div>
 </template>
 
 <script>
 import Navigation from '@/components/Navigation.vue';
+import NavigationCategories from '@/components/Navigation-categories.vue';
 
 export default {
   components: {
     Navigation,
+    NavigationCategories
   },
 };
 </script>
@@ -35,6 +38,20 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f3f3;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #c1c1c1;
+}
+
+html {
+  overflow: hidden;
 }
 
 .btn {
