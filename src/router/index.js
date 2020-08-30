@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Cart from '../views/Cart.vue';
 import Search from '../views/Search.vue';
-import Categories from '../views/Categories.vue';
+import Products from '../views/Products.vue';
 import Product from '../views/Product.vue';
 
 Vue.use(VueRouter);
@@ -25,12 +25,12 @@ const routes = [
     component: Search
   },
   {
-    path: '/categories/:category',
-    name: 'Categories',
-    component: Categories
+    path: '/products/:category',
+    name: 'Products',
+    component: Products
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'Product',
     component: Product
   },

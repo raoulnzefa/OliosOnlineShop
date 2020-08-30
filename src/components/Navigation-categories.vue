@@ -16,7 +16,7 @@
             <router-link
               v-for="category in visibleCategories"
               :key="category.name"
-              :to="`/categories/${getCategoryLinkParam(category.name)}`"
+              :to="`/products/${getCategoryLinkParam(category.name)}`"
               tag="li"
             >
               <a @click="hideCategoriesNav()" class="link">
