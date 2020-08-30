@@ -3,7 +3,7 @@
     <div class="title-wrapper">
       <p class="title">Products</p>
       <p class="category">{{ categoryName }}</p>
-      <img :src="require(`../assets/img/categories/${categoryIconName(categoryName)}`)" alt="icon">
+      <img :src="require(`../assets/img/${categoryIconName(categoryName)}`)" alt="icon">
     </div>
     <transition-group tag="ul" name="fade-in" appear class="product-list">
       <product-card

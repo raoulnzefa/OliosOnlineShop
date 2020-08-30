@@ -13,10 +13,7 @@
         >
           <a class="link">
             <img
-              :src="require(`../assets/img/nav/${link.url === $route.path
-                ? link.activeLinkIconName
-                : link.iconName
-              }`)"
+              :src="require(`../assets/img/${navIcon(link)}`)"
               alt="Icon"
             >
           </a>
@@ -35,6 +32,11 @@ export default {
     ...mapGetters([
       'nav'
     ])
+  },
+  methods: {
+    navIcon(link) {
+      return link.url === this.$route.path ? link.activeLinkIconName : link.iconName;
+    }
   }
 };
 </script>

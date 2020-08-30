@@ -22,7 +22,7 @@
               <a @click="hideCategoriesNav()" class="link">
                 {{ category.name }}
                 <img
-                  :src="require(`../assets/img/categories/${getIconName(category)}`)"
+                  :src="require(`../assets/img/${navCategoriesIcon(category)}`)"
                   alt="Icon"
                 >
               </a>
@@ -69,16 +69,16 @@ export default {
       'showCategoriesNav',
       'hideCategoriesNav'
     ]),
+    navCategoriesIcon(category) {
+      return this.$route.path === `/products/${this.getCategoryLinkParam(category.name)}`
+        ? category.activeLinkIconName
+        : category.iconName;
+    },
     showAllCategories() {
       this.showCategoriesQuantity = this.categories.length;
     },
     getCategoryLinkParam(name) {
       return name.replace(/\s/g, '-').toLowerCase();
-    },
-    getIconName(category) {
-      return `/categories/${this.getCategoryLinkParam(category.name)}` === this.$route.path
-        ? category.activeLinkIconName
-        : category.iconName;
     }
   }
 };

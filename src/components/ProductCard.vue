@@ -1,7 +1,7 @@
 <template>
   <li class="product-card">
     <img
-      :src="require(`../assets/img/products/${categoryName}/${productInfo.img}`)"
+      :src="require(`../assets/img/${productInfo.img}`)"
       :alt="productInfo.name"
       class="preview"
     >
