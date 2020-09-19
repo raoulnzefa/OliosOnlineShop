@@ -53,6 +53,7 @@ export default {
     left: 0;
     background-color: #fff;
     box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.5);
+    z-index: 3;
 
     .logo {
       margin: 35px 0 110px 0;

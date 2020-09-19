@@ -7,7 +7,7 @@
     >
     <div class="info">
       <router-link
-        :to="`/product/${productInfo.id}`"
+        :to="`/product/${categoryName}/${productInfo.id}`"
         tag="a"
         class="title"
       >
