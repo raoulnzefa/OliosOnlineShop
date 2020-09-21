@@ -30,7 +30,7 @@
           </transition-group>
         </nav>
         <button
-          v-show="btnShowAllCategories"
+          v-show="isBtnShowAllCategories"
           @click="showAllCategories"
           class="btn btn-show-all-categories"
         >
@@ -48,20 +48,19 @@ export default {
   name: 'NavigationCategories',
   data() {
     return {
-      showCategoriesQuantity: 5
+      visibleCategoriesQuantity: 5
     };
   },
   computed: {
     ...mapGetters([
-      'categories',
+      'categoriesInfo',
       'isNavCategoriesOpen'
     ]),
     visibleCategories() {
-      return JSON.parse(JSON.stringify(this.categories))
-        .slice(0, this.showCategoriesQuantity);
+      return this.categoriesInfo.slice(0, this.visibleCategoriesQuantity);
     },
-    btnShowAllCategories() {
-      return this.showCategoriesQuantity < this.categories.length;
+    isBtnShowAllCategories() {
+      return this.visibleCategoriesQuantity < this.categoriesInfo.length;
     }
   },
   methods: {
@@ -74,11 +73,11 @@ export default {
         ? category.activeLinkIconName
         : category.iconName;
     },
-    showAllCategories() {
-      this.showCategoriesQuantity = this.categories.length;
-    },
     getCategoryLinkParam(name) {
       return name.replace(/\s/g, '-').toLowerCase();
+    },
+    showAllCategories() {
+      this.visibleCategoriesQuantity = this.categoriesInfo.length;
     }
   }
 };

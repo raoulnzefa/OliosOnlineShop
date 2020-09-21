@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import Navigation from '@/components/Navigation.vue';
 import NavigationCategories from '@/components/Navigation-categories.vue';
 
@@ -15,6 +17,14 @@ export default {
     Navigation,
     NavigationCategories
   },
+  created() {
+    this.loadData();
+  },
+  methods: {
+    ...mapActions([
+      'loadData'
+    ]),
+  }
 };
 </script>
 

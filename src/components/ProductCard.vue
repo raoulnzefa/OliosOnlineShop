@@ -14,18 +14,23 @@
         {{ productInfo.name }}
       </router-link>
       <p class="description">{{ productInfo.description }}</p>
-      <p class="price">${{ productInfo.price }}</p>
+      <p class="price">${{ discountedPrice(productInfo.price, productInfo.discountPercent) }}</p>
     </div>
   </li>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'ProductCard',
   props: [
     'productInfo'
   ],
   computed: {
+    ...mapGetters([
+      'discountedPrice'
+    ]),
     categoryName() {
       return this.$route.params.category;
     }

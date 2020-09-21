@@ -29,35 +29,51 @@ export default new Vuex.Store({
     cart: []
   },
   getters: {
-    productInCart(state) {
-      return id => state.cart.filter(product => product.id === id)[0];
-    },
     nav(state) {
       return state.nav;
     },
-    categories(state) {
-      return state.categories;
+    categoriesInfo(state) {
+      return state.categories.map(category => {
+        return {
+          name: category.name,
+          iconName: category.iconName,
+          activeLinkIconName: category.activeLinkIconName
+        };
+      });
     },
     isNavCategoriesOpen(state) {
       return state.isNavCategoriesOpen;
-    },
-    products(state) {
-      return category => state.products.filter(prodList => prodList.category === category)[0];
-    },
-    product(state) {
-      return id => state.products
-        .map(productList => productList.products
-          .filter(product => product.id === id)).filter(arr => arr.length !== 0)[0][0];
     },
     categoryIconName(state) {
       return categoryName => state.categories.filter(category => category.name === categoryName)[0]
         .iconName;
     },
-    productDiscountPercent(state) {
-      return state.productDiscountPercent;
+    productsList(state) {
+      return currentCategory => state.categories
+        .filter(category => category.name === currentCategory)[0];
     },
-    productsDescription(state) {
-      return state.productsDescription;
+    product(state) {
+      return id => state.categories
+        .map(category => category.products
+          .filter(product => product.id === id)).filter(arr => arr.length !== 0)[0][0];
+    },
+    discountedPrice() {
+      return (price, discountPercent) => {
+        const discount = (price / 100) * discountPercent;
+        return parseInt(price - discount, 10);
+      };
+    },
+    recommendedProducts(state, getters) {
+      return (categoryName, id) => {
+        const recommendedProducts = getters.productsList(categoryName).products
+          .filter(product => product.id !== id)
+          .sort(() => Math.round(Math.random() * 100) - 50);
+
+        return recommendedProducts.slice(0, 3);
+      };
+    },
+    productInCart(state) {
+      return id => state.cart.filter(product => product.id === id)[0];
     }
   },
   mutations: {

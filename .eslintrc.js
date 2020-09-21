@@ -24,6 +24,7 @@ module.exports = {
     "no-plusplus": "off",
     "arrow-parens": "off",
     "keyword-spacing": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "arrow-body-style": "off"
   },
 };

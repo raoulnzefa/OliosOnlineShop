@@ -33,11 +33,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'products',
+      'productsList',
       'categoryIconName',
     ]),
     visibleProductList() {
-      return this.products(this.categoryName).products.slice(0, this.visibleProducts);
+      return this.productsList(this.categoryName).products.slice(0, this.visibleProducts);
     },
     categoryName() {
       return this.$route.params.category.replace(/-/g, ' ');
@@ -54,7 +54,8 @@ export default {
       const { scrollHeight, scrollTop } = this.$refs.categoriesWrapper;
       const { clientHeight } = document.documentElement;
       const scrollIsBottom = scrollHeight - scrollTop - 10 <= clientHeight;
-      const haveProducts = this.visibleProducts <= this.products(this.categoryName).products.length;
+      const haveProducts = this.visibleProducts <= this.productsList(this.categoryName)
+        .products.length;
       const loadProductsCondition = scrollIsBottom && haveProducts;
 
       if(loadProductsCondition) {

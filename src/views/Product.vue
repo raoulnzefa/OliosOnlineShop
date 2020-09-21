@@ -14,10 +14,14 @@
       </div>
       <div class="product-info">
         <p class="title">{{ productInfo.name }}</p>
-        <p class="description">{{ productsDescription }}</p>
+        <p class="description">{{ productInfo.description }}</p>
         <div class="order-wrapper">
-          <p class="price">${{ discount }}</p>
-          <p class="full-price">{{ productInfo.price }}</p>
+          <p
+            class="price"
+          >
+            ${{ discountedPrice(productInfo.price, productInfo.discountPercent) }}
+          </p>
+          <p v-if="productInfo.discountPercent !== 0" class="full-price">{{ productInfo.price }}</p>
           <div class="quantity-input-wrapper">
             <input
               @input="validate"
@@ -47,7 +51,7 @@
       </div>
       <ul class="recommended-list">
         <li
-          v-for="product in recommendedProducts"
+          v-for="product in recommendedProducts(categoryName, productInfo.id)"
           :key="product.id"
           class="recommended-product"
         >
@@ -85,19 +89,11 @@ export default {
   computed: {
     ...mapGetters([
       'productInCart',
-      'products',
       'product',
-      'categoryIconName',
-      'productDiscountPercent',
-      'productsDescription'
+      'discountedPrice',
+      'recommendedProducts',
+      'categoryIconName'
     ]),
-    recommendedProducts() {
-      const recommendedProducts = this.products(this.categoryName).products
-        .filter(product => product.id !== this.productInfo.id)
-        .sort(() => Math.round(Math.random() * 100) - 50);
-
-      return recommendedProducts.slice(0, 3);
-    },
     productInCartQuantity() {
       let quantity;
 
@@ -113,18 +109,13 @@ export default {
       return this.$route.params.category;
     },
     categoryName() {
-      const { category } = this.$route.params;
-      return category.replace(/-/g, ' ');
+      return this.$route.params.category.replace(/-/g, ' ');
     },
     categoryIcon() {
       return this.categoryIconName(this.categoryName);
     },
     productInfo() {
       return this.product(parseInt(this.$route.params.id, 10));
-    },
-    discount() {
-      const discount = (this.productInfo.price / 100) * this.productDiscountPercent;
-      return parseInt(this.productInfo.price - discount, 10);
     }
   },
   methods: {
