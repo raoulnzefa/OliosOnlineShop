@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Home',
   data() {
@@ -41,7 +43,14 @@ export default {
       ]
     };
   },
+  created() {
+    this.loadData();
+    this.setSloganInterval();
+  },
   methods: {
+    ...mapActions([
+      'loadData'
+    ]),
     changeSlogan(index) {
       this.currentSlogan = index;
       clearInterval(this.sloganInterval);
@@ -54,9 +63,6 @@ export default {
           : this.currentSlogan = 0;
       }, this.intervalTime * 1000);
     }
-  },
-  created() {
-    this.setSloganInterval();
   }
 };
 </script>
