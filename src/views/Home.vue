@@ -6,13 +6,13 @@
       <p
         v-show="currentSlogan === index"
         v-for="(slogan, index) in slogans"
-        :key="index"
+        :key="slogan"
         class="slogan"
       >
         {{ slogan }}
       </p>
     </transition-group>
-    <router-link to="/products" tag="button" class="btn btn-view-more">View More</router-link>
+    <router-link :to="firstCategory" tag="button" class="btn btn-view-more">View More</router-link>
     <ul class="dots">
       <li v-for="num in slogans.length" :key="num">
         <button
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Home',
   data() {
@@ -43,6 +45,14 @@ export default {
   },
   created() {
     this.setSloganInterval();
+  },
+  computed: {
+    ...mapGetters([
+      'categoriesInfo'
+    ]),
+    firstCategory() {
+      return `/products/${this.categoriesInfo[0].name.replace(/\s/g, '-').toLowerCase()}`;
+    }
   },
   methods: {
     changeSlogan(index) {

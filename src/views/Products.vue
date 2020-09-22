@@ -7,8 +7,8 @@
     </div>
     <transition-group tag="ul" name="fade-in" appear class="product-list">
       <product-card
-        v-for="(product, index) in visibleProductList"
-        :key="index - 1"
+        v-for="product in visibleProductList"
+        :key="product.id"
         :product-info="product"
       ></product-card>
     </transition-group>
@@ -72,13 +72,21 @@ export default {
       }
     }
   },
+  watch: {
+    $route(to, from) {
+      if(from.path !== to.path) {
+        this.$refs.categoriesWrapper.scrollTo(0, 0);
+        this.visibleProducts = 5;
+      }
+    }
+  },
   mounted() {
     const { scrollHeight, offsetHeight } = this.$refs.categoriesWrapper;
     const noScroll = scrollHeight === offsetHeight;
     if(noScroll) {
       this.loadProducts();
     }
-  },
+  }
 };
 </script>
 

@@ -13,7 +13,7 @@
       >
         {{ productInfo.name }}
       </router-link>
-      <p class="description">{{ productInfo.description }}</p>
+      <p class="description">{{ productInfo.caption }}</p>
       <p class="price">${{ discountedPrice(productInfo.price, productInfo.discountPercent) }}</p>
     </div>
   </li>
