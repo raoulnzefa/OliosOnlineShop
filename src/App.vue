@@ -61,7 +61,7 @@ a {
 }
 
 html {
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .btn {

@@ -48,6 +48,29 @@ export default new Vuex.Store({
       return categoryName => state.categories.filter(category => category.name === categoryName)[0]
         .iconName;
     },
+    searchProducts(state) {
+      return name => {
+        const result = [];
+
+        state.categories.forEach(category => {
+          const currentCategory = category.name;
+
+          category.products.forEach(product => {
+            const match = product.name.toLowerCase().match(name.trim().toLowerCase());
+            const res = {
+              ...product,
+              category: currentCategory
+            };
+
+            if(match) {
+              result.push(res);
+            }
+          });
+        });
+
+        return result;
+      };
+    },
     productsList(state) {
       return currentCategory => state.categories
         .filter(category => category.name === currentCategory)[0];
@@ -55,7 +78,8 @@ export default new Vuex.Store({
     product(state) {
       return id => state.categories
         .map(category => category.products
-          .filter(product => product.id === id)).filter(arr => arr.length !== 0)[0][0];
+          .filter(product => product.id === id))
+        .filter(arr => arr.length !== 0)[0][0];
     },
     discountedPrice() {
       return (price, discountPercent) => {
