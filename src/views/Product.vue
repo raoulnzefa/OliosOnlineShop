@@ -41,7 +41,7 @@
               In Cart: {{ productInCartQuantity }}
             </p>
             <button
-              @click="addToCart({id: productInfo.id, quantity: +quantity})"
+              @click="addToCart({ ...productInfo, quantity: +quantity, categoryLinkName })"
               class="btn btn-add-to-cart"
             >
               Add to cart

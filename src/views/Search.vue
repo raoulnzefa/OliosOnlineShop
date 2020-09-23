@@ -11,7 +11,7 @@
         maxlength="100"
         autocomplete="off"
       >
-      <button @click="clear" class="btn-clear">
+      <button @click="clear" class="btn btn-clear">
         <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 20 20">
           <path d="M10 8.586l-7.071-7.071-1.414 1.414 7.071 7.071-7.071 7.071 1.414 1.414 7.071-7.071 7.071 7.071 1.414-1.414-7.071-7.071 7.071-7.071-1.414-1.414-7.071 7.071z"></path>
         </svg>
@@ -136,9 +136,7 @@ export default {
         position: absolute;
         top: 32px;
         right: 0;
-        border: none;
         background-color: transparent;
-        cursor: pointer;
 
         &:hover {
           svg {
@@ -180,7 +178,7 @@ export default {
         align-items: center;
         margin: 20px 0;
         padding: 20px;
-        background: #fff;
+        background-color: #fff;
         box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.5);
 
         .preview {

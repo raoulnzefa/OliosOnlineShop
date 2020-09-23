@@ -98,6 +98,9 @@ export default new Vuex.Store({
     },
     productInCart(state) {
       return id => state.cart.filter(product => product.id === id)[0];
+    },
+    cart(state) {
+      return state.cart;
     }
   },
   mutations: {
@@ -123,6 +126,13 @@ export default new Vuex.Store({
       if(!hasAlready) {
         state.cart.push(payload);
       }
+    },
+    removeFromCart(state, payload) {
+      state.cart.forEach((product, i, cart) => {
+        if(product.id === payload) {
+          cart.splice(i, 1);
+        }
+      });
     }
   },
   actions: {
@@ -137,6 +147,9 @@ export default new Vuex.Store({
     },
     addToCart(store, payload) {
       store.commit('addToCart', payload);
+    },
+    removeFromCart(store, payload) {
+      store.commit('removeFromCart', payload);
     }
   }
 });
