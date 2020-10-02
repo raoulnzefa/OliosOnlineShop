@@ -1,5 +1,9 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    v-touch:swipe.left="showCategoriesNav"
+    v-touch:swipe.right="hideCategoriesNav"
+  >
     <router-view></router-view>
     <navigation></navigation>
     <navigation-categories></navigation-categories>
@@ -22,6 +26,8 @@ export default {
   },
   methods: {
     ...mapActions([
+      'showCategoriesNav',
+      'hideCategoriesNav',
       'loadData'
     ]),
   }
@@ -39,6 +45,7 @@ export default {
 }
 
 body {
+  min-width: 320px;
   background-color: #f0f0f0;
 }
 
@@ -58,10 +65,6 @@ a {
 ::-webkit-scrollbar-thumb {
   border-radius: 2px;
   background-color: #c1c1c1;
-}
-
-html {
-  // overflow: hidden;
 }
 
 .btn {

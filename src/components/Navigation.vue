@@ -42,6 +42,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/partials/_media-queries';
+
   .nav-wrapper {
     width: 145px;
     height: 100vh;
@@ -55,25 +57,79 @@ export default {
     box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.5);
     z-index: 3;
 
+    @include media-xl {
+      width: 90px;
+    }
+
+    @include media-md {
+      width: 100%;
+      height: 60px;
+      flex-direction: row;
+    }
+
     .logo {
       margin: 35px 0 110px 0;
+
+      @include media-md {
+        margin: 0 0 0 10px;
+      }
+
+      @include media-sm {
+        display: none;
+      }
+
     }
 
     .nav {
       width: 100%;
 
-      .link {
-        display: block;
-        padding: 40px 0;
-        transition: background-color .1s ease-in-out;
+      @include media-md {
+        width: auto;
+        margin: 0 auto;
 
-        &:hover {
-          background-color: #f5f3f3;
+        @include media-sm {
+          margin: 0 10px;
+        }
+      }
+
+      ul {
+        @include media-md {
+          display: flex;
         }
 
-        img {
+        .link {
           display: block;
-          margin: 0 auto;
+          padding: 40px 0;
+          transition: background-color .1s ease-in-out;
+
+          @include media-xl {
+            padding: 30px 0;
+          }
+
+          @include media-md {
+            width: 60px;
+            height: 60px;
+            margin: 0 20px;
+            padding: 0;
+            overflow: hidden;
+          }
+
+          @include media-sm {
+            margin: 0 10px;
+          }
+
+          &:hover {
+            background-color: #f5f3f3;
+          }
+
+          img {
+            display: block;
+            margin: 0 auto;
+
+            @include media-md {
+              margin: 14px auto;
+            }
+          }
         }
       }
     }

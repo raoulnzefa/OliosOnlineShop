@@ -39,6 +39,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/partials/_media-queries';
+
   .product-card {
     display: flex;
     flex-direction: column;
@@ -52,14 +54,32 @@ export default {
       flex-direction: row;
       align-items: center;
 
+      @include media-lg {
+        grid-column-start: unset;
+        grid-column-end: unset;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
       .preview {
         max-width: 60%;
         max-height: 90%;
         margin: 0 auto 20px auto;
+
+        @include media-lg {
+          max-width: 100%;
+          max-height: calc(100% - 160px);
+          margin: auto;
+        }
       }
 
       .info {
         margin-left: 40px;
+
+        @include media-lg {
+          margin-left: 0;
+        }
       }
     }
 
@@ -69,14 +89,32 @@ export default {
       flex-direction: row;
       align-items: center;
 
+      @include media-lg {
+        grid-column-start: unset;
+        grid-column-end: unset;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
       .preview {
         max-width: 50%;
         max-height: 100%;
         margin: 0 auto 20px auto;
+
+        @include media-lg {
+          max-width: 100%;
+          max-height: calc(100% - 160px);
+          margin: auto;
+        }
       }
 
       .info {
         margin-left: 40px;
+
+        @include media-lg {
+          margin-left: 0;
+        }
       }
     }
 
@@ -86,14 +124,32 @@ export default {
       flex-direction: row-reverse;
       align-items: center;
 
+      @include media-lg {
+        grid-column-start: unset;
+        grid-column-end: unset;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
       .preview {
         max-width: 60%;
         max-height: 90%;
         margin: 0 auto 20px auto;
+
+        @include media-lg {
+          max-width: 100%;
+          max-height: calc(100% - 160px);
+          margin: auto;
+        }
       }
 
       .info {
         margin-right: 40px;
+
+        @include media-lg {
+          margin-right: 0;
+        }
       }
     }
 
@@ -101,7 +157,7 @@ export default {
       max-width: 100%;
       max-height: calc(100% - 160px);
       display: block;
-      margin: auto auto 20px auto;
+      margin: auto;
     }
 
     .info {

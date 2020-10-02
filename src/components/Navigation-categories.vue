@@ -1,6 +1,10 @@
 <template>
   <div>
-    <button @click="showCategoriesNav()" ref="btnShowNav" class="btn btn-show-nav"></button>
+    <button
+      @click="showCategoriesNav()"
+      ref="btnShowNav"
+      class="btn btn-show-nav">
+    </button>
     <transition name="slide">
       <div
         v-show="isNavCategoriesOpen"
@@ -84,6 +88,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/partials/_media-queries';
+
   .btn-show-nav,
   .btn-hide-nav {
     width: 90px;
@@ -95,6 +101,23 @@ export default {
     box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.5);
     transition: background-color .1s ease-in-out;
 
+    @include media-xl {
+      width: 70px;
+      height: 70px;
+      top: 40px;
+      right: 40px;
+    }
+
+    @include media-md {
+      width: 60px;
+      height: 60px;
+      top: 0;
+      right: 10px;
+      border-radius: 0;
+      box-shadow: none;
+      z-index: 999;
+    }
+
     &:hover {
       background-color: #f5f3f3;
     }
@@ -102,10 +125,21 @@ export default {
 
   .btn-show-nav {
     background: url('../assets/img/hamburger-nav-icon.png') center no-repeat, #fff;
+
   }
 
   .btn-hide-nav {
+    right: 45px;
     background: url('../assets/img/cross-icon.png') center no-repeat, #fff;
+
+    @include media-xl {
+      right: 30px;
+    }
+
+    @include media-md {
+      position: fixed;
+      right: 10px;
+    }
   }
 
   .nav-categories-wrapper {
@@ -117,12 +151,25 @@ export default {
     right: 0;
     overflow: auto;
     box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.5);
+    overflow-x: hidden;
+
+    @include media-xs {
+      width: 100%;
+    }
 
     .nav-categories {
-      margin: 390px 0 200px 0;
+      margin: 290px 0 100px 0;
+
+      @include media-xl {
+        margin: 190px 0 50px 0;
+      }
+
+      @include media-xs {
+        margin: 100px 0 50px 0;
+      }
 
       .link {
-        width: 100%;
+        width: 370px;
         display: block;
         position: relative;
         padding: 50px 0;
@@ -130,8 +177,16 @@ export default {
         padding-right: 165px;
         color: #c1c1c1;
         text-transform: uppercase;
+        white-space: nowrap;
         font-size: 18px;
         transition: background-color .1s ease-in-out;
+
+        @include media-xs {
+          width: 100%;
+          padding: 30px 0 30px 0;
+          text-align: left;
+          text-indent: 130px;
+        }
 
         &:hover {
           background-color: #f5f3f3;
@@ -142,6 +197,10 @@ export default {
           left: 240px;
           top: 50%;
           transform: translateY(-50%);
+
+          @include media-xs {
+            left: 40px;
+          }
         }
       }
     }
@@ -156,6 +215,10 @@ export default {
       text-transform: uppercase;
       font-size: 18px;
       transition: background-color .1s ease-in-out;
+
+      @include media-xs {
+        margin-bottom: 40px;
+      }
 
       &:hover {
         background-color: #f5f3f3;
@@ -175,24 +238,25 @@ export default {
   }
 
   .slide-enter {
-    right: -370px;
+    width: 0;
   }
 
   .slide-enter-active,
   .slide-leave-active {
-    transition: right .3s ease-in-out;
+    transition: width .3s ease-in-out;
   }
 
-  .slide-enter-to {
-    right: 0;
-  }
-
+  .slide-enter-to,
   .slide-leave {
-    right: 0;
+    width: 370px;
+
+    @include media-xs {
+      width: 100%;
+    }
   }
 
   .slide-leave-to {
-    right: -370px;
+    width: 0;
   }
 
   .fade-in-enter {

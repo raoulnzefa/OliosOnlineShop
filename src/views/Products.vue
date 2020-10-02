@@ -3,7 +3,11 @@
     <div class="title-wrapper">
       <p class="title">Products</p>
       <p class="category">{{ categoryName }}</p>
-      <img :src="require(`../assets/img/${categoryIconName(categoryName)}`)" alt="icon">
+      <img
+        :src="require(`../assets/img/${categoryIconName(categoryName)}`)"
+        alt="icon"
+        class="category-icon"
+      >
     </div>
     <transition-group tag="ul" name="fade-in" appear class="product-list">
       <product-card
@@ -91,10 +95,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/partials/_media-queries';
+
   .wrapper {
     height: 100vh;
     padding: 80px 40px 100px 185px;
     overflow: auto;
+
+    @include media-xl {
+      padding: 50px 40px 100px 135px;
+    }
+
+    @include media-lg {
+      padding: 50px 30px 50px 125px;
+    }
+
+    @include media-md {
+      padding: 100px 20px 50px 20px;
+    }
+
+    @include media-sm {
+      padding: 80px 10px 30px 10px;
+    }
 
     .title-wrapper {
       max-width: 1490px;
@@ -102,10 +124,26 @@ export default {
       margin: 0 auto 100px auto;
       align-items: center;
 
+      @include media-lg {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0 auto 50px auto;
+      }
+
       .title {
         text-transform: uppercase;
         font-size: 72px;
         font-weight: 300;
+
+        @include media-lg {
+          width: 100%;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        @include media-xs {
+          font-size: 50px;
+        }
       }
 
       .category {
@@ -113,6 +151,19 @@ export default {
         color: #c1c1c1;
         text-transform: uppercase;
         font-size: 18px;
+
+        @include media-lg {
+          margin: 0;
+          margin-right: 20px;
+        }
+      }
+
+      .category-icon {
+        margin-right: 130px;
+
+        @include media-lg {
+          margin: 0;
+        }
       }
     }
 
@@ -123,15 +174,19 @@ export default {
       grid-auto-rows: 420px;
       grid-gap: 40px;
       margin: 0 auto;
-    }
 
-    .btn-show-more-products {
-      display: block;
-      margin: 130px auto 0 auto;
-      color: #0023ff;
-      text-transform: uppercase;
-      font-size: 18px;
-      font-weight: bold;
+      @include media-lg {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+      }
+
+      @include media-sm {
+        grid-gap: 10px;
+      }
+
+      @include media-xs {
+        grid-template-columns: 1fr;
+      }
     }
   }
 

@@ -72,24 +72,44 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/partials/_media-queries';
+
   .main {
     width: 100%;
     height: 100vh;
     position: relative;
-    // padding-top: 170px;
-    padding-top: 50px;
+    padding: 150px 10px 0 10px;
     background: url('../assets/img/home-bg.png') center bottom / cover no-repeat;
+
+    @include media-xl {
+      padding-top: 70px;
+    }
 
     .bg-text {
       position: absolute;
-      top: 70px;
+      top: 75px;
       left: 50%;
       color: rgba(231, 231, 231, 0.7);
       text-transform: uppercase;
-      // font-size: 400px;
-      font-size: 200px;
+      font-size: 300px;
       font-weight: 900;
       transform: translateX(-50%);
+
+      @include media-xl {
+        font-size: 200px;
+      }
+
+      @include media-lg {
+        font-size: 150px;
+      }
+
+      @include media-md {
+        font-size: 100px;
+      }
+
+      @include media-sm {
+        display: none;
+      }
     }
 
     .title {
@@ -99,6 +119,18 @@ export default {
       text-align: center;
       font-size: 220px;
       font-weight: 100;
+
+      @include media-lg {
+        font-size: 180px;
+      }
+
+      @include media-md {
+        font-size: 120px;
+      }
+
+      @include media-xs {
+        font-size: 90px;
+      }
     }
 
     .slogan {
@@ -108,6 +140,10 @@ export default {
       text-align: center;
       font-size: 36px;
       font-weight: 300;
+
+      @include media-md {
+        font-size: 30px;
+      }
     }
 
     .btn-view-more {
@@ -131,9 +167,21 @@ export default {
 
     .dots {
       display: flex;
+      justify-content: center;
       position: absolute;
       bottom: 100px;
       right: 220px;
+
+      @include media-xl {
+        bottom: 40px;
+        right: 40px;
+      }
+
+      @include media-xs {
+        right: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
       li {
         &:not(:last-child) {

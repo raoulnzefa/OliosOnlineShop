@@ -72,10 +72,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/partials/_media-queries';
+
   .wrapper {
     width: 100%;
     height: 100vh;
-    // padding: 260px 360px 0 360px;
     padding: 80px 160px 100px 185px;
     background-image: linear-gradient(
       rgba(255, 255, 255, .9),
@@ -86,6 +87,22 @@ export default {
     background-position: center bottom;
     background-size: cover;
     overflow: auto;
+
+    @include media-xl {
+      padding: 50px 150px;
+    }
+
+    @include media-lg {
+      padding: 70px 30px 50px 120px;
+    }
+
+    @include media-md {
+      padding: 100px 20px 50px 20px;
+    }
+
+    @include media-sm {
+      padding: 80px 10px 30px 10px;
+    }
 
     .order-info {
       .total {
@@ -106,10 +123,19 @@ export default {
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          margin: 20px 0;
+          position: relative;
+          margin: 40px 0;
           padding: 20px;
           background-color: #fff;
           box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.5);
+
+          @include media-md {
+            margin: 20px 0;
+          }
+
+          @include media-xs {
+            height: 240px;
+          }
 
           .preview {
             width: 100px;
@@ -119,6 +145,14 @@ export default {
             align-items: center;
             margin-right: 30px;
 
+            @include media-md {
+              margin-right: auto;
+            }
+
+            @include media-xs {
+              margin: 0 auto;
+            }
+
             img {
               max-width: 100px;
               max-height: 100px;
@@ -127,10 +161,27 @@ export default {
 
           .name {
             color: #000;
-            // font-size: 72px;
             font-size: 30px;
             font-weight: 300;
             text-transform: uppercase;
+
+            @include media-md {
+              position: absolute;
+              top: 20px;
+              left: 150px;
+              margin-right: 70px;
+            }
+
+            @include media-sm {
+              font-size: 24px;
+            }
+
+            @include media-xs {
+              left: 50%;
+              margin-right: 0;
+              text-align: center;
+              transform: translateX(-50%);
+            }
           }
 
           .price {
@@ -138,6 +189,16 @@ export default {
             color: #0023ff;
             font-size: 18px;
             font-weight: bold;
+
+            @include media-md {
+              position: absolute;
+              bottom: 20px;
+              left: 200px;
+            }
+
+            @include media-xs {
+              left: 55%;
+            }
           }
 
           .quantity {
@@ -145,13 +206,32 @@ export default {
             color: #0023ff;
             font-size: 18px;
             font-weight: bold;
+
+            @include media-md {
+              position: absolute;
+              bottom: 20px;
+              left: 150px;
+              margin: 0;
+            }
+
+            @include media-xs {
+              left: auto;
+              right: 55%;
+            }
           }
 
           .btn-remove-from-cart {
-            width: 36px;
+            min-width: 36px;
+            max-width: 36px;
             height: 36px;
             margin-left: 40px;
             background-color: transparent;
+
+            @include media-xs {
+              position: absolute;
+              top: 20px;
+              right: 20px;
+            }
 
             &:hover {
               svg {

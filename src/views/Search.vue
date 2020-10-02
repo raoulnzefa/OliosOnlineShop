@@ -96,10 +96,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/scss/partials/_media-queries';
+
   .wrapper {
     width: 100%;
     height: 100vh;
-    // padding: 260px 360px 0 360px;
     padding: 80px 160px 100px 185px;
     background-image: linear-gradient(
       rgba(255, 255, 255, .9),
@@ -111,21 +112,44 @@ export default {
     background-size: cover;
     overflow: auto;
 
+    @include media-xl {
+      padding: 50px 150px;
+    }
+
+    @include media-lg {
+      padding: 50px 30px 50px 120px;
+    }
+
+    @include media-md {
+      padding: 100px 20px 50px 20px;
+    }
+
+    @include media-sm {
+      padding: 80px 10px 30px 10px;
+    }
+
     .search-wrapper {
       position: relative;
       margin-bottom: 30px;
 
+      @include media-lg {
+        margin-right: 90px;
+      }
+
+      @include media-md {
+        margin-right: 0;
+      }
+
       .search-input {
         width: 100%;
-        // height: 200px;
         height: 100px;
         margin-bottom: 30px;
         padding: 0 10px;
+        padding-right: 50px;
         border: none;
         border-bottom: 2px solid #e3e3e3;
         background-color: transparent;
         color: #000;
-        // font-size: 140px;
         font-size: 100px;
         font-weight: 300;
       }
@@ -156,6 +180,11 @@ export default {
         color: #c9c9c9;
         font-size: 36px;
         font-weight: 300;
+
+        @include media-md {
+          display: block;
+          text-align: center;
+        }
       }
     }
 
@@ -163,6 +192,10 @@ export default {
       color: #000;
       font-size: 30px;
       font-weight: bold;
+
+      @include media-md {
+        text-align: center;
+      }
     }
 
     .products {
@@ -172,7 +205,6 @@ export default {
 
       .product {
         width: calc(100% / 2 - 20px);
-        // height: 250px;
         height: 120px;
         display: flex;
         align-items: center;
@@ -180,6 +212,19 @@ export default {
         padding: 20px;
         background-color: #fff;
         box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.5);
+
+        @include media-lg {
+          width: 100%;
+        }
+
+        @include media-md {
+          margin: 10px 0;
+        }
+
+        @include media-sm {
+          height: auto;
+          flex-direction: column;
+        }
 
         .preview {
           width: 100px;
@@ -189,6 +234,10 @@ export default {
           align-items: center;
           margin-right: 30px;
 
+          @include media-sm {
+            margin-right: 0;
+          }
+
           img {
             max-width: 100px;
             max-height: 100px;
@@ -197,10 +246,13 @@ export default {
 
         .name {
           color: #000;
-          // font-size: 72px;
           font-size: 30px;
           font-weight: 300;
           text-transform: uppercase;
+
+          @include media-sm {
+            text-align: center;
+          }
         }
       }
     }
