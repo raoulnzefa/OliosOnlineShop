@@ -14,7 +14,7 @@
 import { mapActions } from 'vuex';
 
 import Navigation from '@/components/Navigation.vue';
-import NavigationCategories from '@/components/Navigation-categories.vue';
+import NavigationCategories from '@/components/NavigationCategories.vue';
 
 export default {
   components: {

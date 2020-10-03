@@ -4,7 +4,7 @@
       <p class="likes">{{ productInfo.likes }}</p>
       <img :src="require(`../assets/img/${productInfo.img}`)" :alt="productInfo.name">
     </div>
-    <div class="info-wrapper">
+    <div class="info-wrapper" ref="infoWrapper">
       <div class="category-info">
         <p class="label">Products</p>
         <p class="category">
@@ -19,101 +19,29 @@
             <img :src="require(`../assets/img/${productInfo.img}`)" :alt="productInfo.name">
           </div>
         <p class="description">{{ productInfo.description }}</p>
-        <div class="order-wrapper">
-          <p
-            class="price"
-          >
-            ${{ discountedPrice(productInfo.price, productInfo.discountPercent) }}
-          </p>
-          <p v-if="productInfo.discountPercent !== 0" class="full-price">{{ productInfo.price }}</p>
-          <div class="quantity-input-wrapper">
-            <input
-              @input="validate"
-              @blur="notEmpty"
-              type="number"
-              :value="quantity"
-              min="1"
-              max="99"
-              class="quantity"
-            >
-          </div>
-          <div class="btn-add-to-cart-wrapper">
-            <p
-              v-show="productInCartQuantity"
-              class="in-cart"
-            >
-              In Cart: {{ productInCartQuantity }}
-            </p>
-            <button
-              @click="addToCart({ ...productInfo, quantity: +quantity, categoryLinkName })"
-              class="btn btn-add-to-cart"
-            >
-              Add to cart
-            </button>
-          </div>
-        </div>
+        <field-add-to-cart></field-add-to-cart>
       </div>
-      <ul class="recommended-list">
-        <li
-          v-for="product in recommendedProducts(categoryName, productInfo.id)"
-          :key="product.id"
-          class="recommended-product"
-        >
-          <div class="recommended-preview-wrapper">
-              <img
-              :src="require(`../assets/img/${product.img}`)"
-              alt="product.name"
-              class="recommended-preview"
-            >
-          </div>
-          <div class="recommended-info">
-            <router-link
-              :to="`/product/${categoryLinkName}/${product.id}`"
-              tag="a"
-              class="recommended-title"
-            >
-              {{ product.name }}
-            </router-link>
-            <p class="recommended-description">{{ product.description }}</p>
-          </div>
-        </li>
-      </ul>
+      <recommended-list></recommended-list>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
+import RecommendedList from '@/components/RecommendedList.vue';
+import FieldAddToCart from '@/components/FieldAddToCart.vue';
 
 export default {
   name: 'Product',
-  data() {
-    return {
-      quantity: 1
-    };
+  components: {
+    RecommendedList,
+    FieldAddToCart
   },
   computed: {
     ...mapGetters([
-      'productInCart',
       'product',
-      'discountedPrice',
-      'recommendedProducts',
       'categoryIconName'
     ]),
-    productInCartQuantity() {
-      let quantity;
-
-      if(this.productInCart(this.productInfo.id)) {
-        quantity = this.productInCart(this.productInfo.id).quantity;
-      } else {
-        quantity = '';
-      }
-
-      return quantity;
-    },
-    categoryLinkName() {
-      return this.$route.params.category;
-    },
     categoryName() {
       return this.$route.params.category.replace(/-/g, ' ');
     },
@@ -124,27 +52,13 @@ export default {
       return this.product(parseInt(this.$route.params.id, 10));
     }
   },
-  methods: {
-    ...mapActions([
-      'addToCart'
-    ]),
-    validate(e) {
-      if(e.target.value.length > 2) {
-        e.target.value = e.target.value.slice(0, -1);
+  watch: {
+    $route(to, from) {
+      if(from.path !== to.path) {
+        this.$refs.infoWrapper.scrollTo(0, 0);
       }
-    },
-    notEmpty(e) {
-      if(+e.target.value === 0) {
-        e.target.value = 1;
-      }
-
-      if(+e.target.value[0] === 0) {
-        e.target.value = e.target.value.slice(1);
-      }
-
-      this.quantity = e.target.value;
     }
-  }
+  },
 };
 </script>
 
@@ -417,289 +331,6 @@ export default {
             width: 100%;
             margin-left: 0;
             text-align: center;
-          }
-        }
-
-        .order-wrapper {
-          display: flex;
-          align-items: center;
-          margin-bottom: 20px;
-
-          @include media-xl {
-            flex-wrap: wrap;
-          }
-
-          @include media-lg {
-            width: 100%;
-            flex-wrap: nowrap;
-            margin-top: 70px;
-          }
-
-          @include media-sm {
-            flex-wrap: wrap;
-            justify-content: center;
-          }
-
-          .price {
-            position: relative;
-            margin-right: 25px;
-            color: #0023ff;
-            font-size: 48px;
-            font-weight: bold;
-
-            @include media-sm {
-              margin-right: 10px;
-              font-size: 30px;
-            }
-
-            &::before {
-              content: 'COST';
-              position: absolute;
-              top: -40px;
-              left: 0;
-              color: #000;
-              font-size: 18px;
-              font-weight: 300;
-            }
-          }
-
-          .full-price {
-            color: #000;
-            text-decoration: line-through;
-            font-size: 24px;
-            font-weight: bold;
-
-            @include media-sm {
-              font-size: 20px;
-            }
-          }
-
-          .quantity-input-wrapper {
-            position: relative;
-            margin: 0 60px 0 auto;
-
-            @include media-xl {
-              margin: 0 0 0 auto;
-            }
-
-            @include media-lg {
-              margin: 0;
-            }
-
-            &::before {
-              content: 'QUANTITY';
-              position: absolute;
-              top: -40px;
-              left: 30px;
-              color: #000;
-              font-size: 18px;
-              font-weight: 300;
-
-              @include media-sm {
-                top: -30px;
-              }
-            }
-
-            .quantity {
-              width: 85px;
-              height: 55px;
-              margin-left: 30px;
-              border: none;
-              border-radius: 30px;
-              background-color: #fff;
-              color: #000;
-              text-align: center;
-              font-size: 30px;
-              font-weight: bold;
-            }
-          }
-
-          .btn-add-to-cart-wrapper {
-            position: relative;
-
-            @include media-xl {
-              width: 100%;
-            }
-
-            @include media-lg {
-              width: auto;
-              margin-left: auto;
-            }
-
-            @include media-sm {
-              width: 100%;
-            }
-
-            .in-cart {
-              position: absolute;
-              top: -40px;
-              left: 0;
-              color: #000;
-              font-size: 18px;
-              font-weight: 300;
-
-              @include media-xl {
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-              }
-
-              @include media-lg {
-                top: -30px;
-              }
-
-              @include media-sm {
-                top: 20px;
-              }
-            }
-
-            .btn-add-to-cart {
-              width: 215px;
-              height: 55px;
-              border-radius: 30px;
-              color: #fff;
-              text-transform: uppercase;
-              font-size: 18px;
-              font-weight: 900;
-              background-color: #0023ff;
-              transition: background-color .1s ease-in-out;
-
-              @include media-xl {
-                display: block;
-                margin: 50px auto 0 auto;
-              }
-
-              @include media-lg {
-                margin: 0;
-              }
-
-              @include media-sm {
-                margin: 50px auto 0 auto;
-              }
-
-              &:hover {
-                background-color: #0621d1;
-              }
-            }
-          }
-        }
-      }
-
-      .recommended-list {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-        padding: 10px 10px 10px 120px;
-        background-color: #fff;
-        box-shadow: 0px 0px 25px 0px rgba(219, 219, 219, 0.25);
-
-        @media screen and (max-width: 1600px) {
-          padding: 10px 10px 10px 60px;
-        }
-
-        @include media-xl {
-          flex-direction: column;
-        }
-
-        @include media-sm {
-          padding: 50px 0 10px 0;
-          background-color: transparent;
-        }
-
-        &::before {
-          content: 'RECOMMENDED';
-          position: absolute;
-          top: 50%;
-          left: -30px;
-          color: #ddd;
-          text-align: center;
-          font-size: 30px;
-          font-weight: 300;
-          transform: translateY(-50%) rotate(-90deg);
-
-          @media screen and (max-width: 1600px) {
-            left: -90px;
-          }
-
-          @include media-sm {
-            top: 10px;
-            left: 50%;
-            transform: translateY(0) translateX(-50%) rotate(0);
-          }
-        }
-
-        .recommended-product {
-          width: calc(100% / 3 - 30px);
-          display: flex;
-          flex-direction: column;
-          padding-top: 20px;
-          background-color: #fff;
-
-          @media screen and (max-width: 1600px) {
-            width: calc(100% / 3 - 5px);
-          }
-
-          @include media-xl {
-            width: 100%;
-            flex-direction: row;
-            align-items: center;
-          }
-
-          @include media-sm {
-            flex-direction: column;
-            margin: 5px 0;
-          }
-
-          .recommended-preview-wrapper {
-            min-width: 40%;
-            height: 200px;
-            display: flex;
-
-            .recommended-preview {
-              max-width: 100%;
-              max-height: 100%;
-              display: block;
-              margin: auto;
-            }
-          }
-
-          .recommended-info {
-            margin-top: 20px;
-            padding: 0 40px;
-
-            @include media-xl {
-              margin-top: 0;
-            }
-
-            @include media-xl {
-              padding: 0 10px;
-            }
-
-            @include media-sm {
-              padding: 10px;
-            }
-
-            .recommended-title {
-              font-size: 30px;
-              font-weight: 300;
-
-              @include media-sm {
-                display: block;
-                width: 100%;
-                text-align: center;
-              }
-            }
-
-            .recommended-description {
-              color: #a8a8a8;
-              font-size: 18px;
-              font-weight: 300;
-
-              @include media-sm {
-                text-align: center;
-              }
-            }
           }
         }
       }

@@ -16,6 +16,13 @@
               :src="require(`../assets/img/${navIcon(link)}`)"
               alt="Icon"
             >
+            <span
+              v-if="link.url === '/cart'"
+              v-show="cart.length !== 0"
+              class="counter"
+            >
+              {{ cart.length }}
+            </span>
           </a>
         </router-link>
       </ul>
@@ -30,7 +37,8 @@ export default {
   name: 'Navigation',
   computed: {
     ...mapGetters([
-      'nav'
+      'nav',
+      'cart'
     ])
   },
   methods: {
@@ -99,6 +107,7 @@ export default {
 
         .link {
           display: block;
+          position: relative;
           padding: 40px 0;
           transition: background-color .1s ease-in-out;
 
@@ -129,6 +138,21 @@ export default {
             @include media-md {
               margin: 14px auto;
             }
+          }
+
+          .counter {
+            width: 30px;
+            height: 30px;
+            display: block;
+            position: absolute;
+            top: 20%;
+            left: 60%;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            background-color: #0621d1;
+            color: #fff;
+            font-weight: bold;
           }
         }
       }
