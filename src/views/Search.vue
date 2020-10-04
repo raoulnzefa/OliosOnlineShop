@@ -76,10 +76,12 @@ export default {
   },
   methods: {
     search(e) {
+      const pattern = /^[A-Za-zА-ЯЁа-яё0-9- ]+$/;
+
       this.isInput = true;
       e.preventDefault();
 
-      if(e.target.value === '') {
+      if(e.target.value === '' || !e.target.value.match(pattern)) {
         this.searchInput = '';
         this.searchResult = [];
       } else {
