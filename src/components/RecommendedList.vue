@@ -148,8 +148,14 @@ export default {
         }
 
         .recommended-title {
+          color: #000;
           font-size: 30px;
           font-weight: 300;
+          transition: color .1s ease-in-out;
+
+          &:hover {
+            color: #0023ff;
+          }
 
           @include media-sm {
             display: block;

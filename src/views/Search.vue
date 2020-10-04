@@ -19,7 +19,7 @@
       <label class="search-label" for="search-input">Type product that you are looking for</label>
     </div>
     <p v-if="isInput" class="result-counter">{{ resultCounter }}</p>
-    <ul class="products">
+    <transition-group tag="ul" name="fade-in" class="products">
       <li
         v-for="product in searchResult"
         :key="product.id"
@@ -36,7 +36,7 @@
           {{ product.name }}
         </router-link>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -249,6 +249,11 @@ export default {
           font-size: 30px;
           font-weight: 300;
           text-transform: uppercase;
+          transition: color .1s ease-in-out;
+
+          &:hover {
+            color: #0023ff;
+          }
 
           @include media-sm {
             text-align: center;
@@ -256,5 +261,19 @@ export default {
         }
       }
     }
+  }
+
+  .fade-in-enter {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .fade-in-enter-active {
+    transition: opacity .5s ease-in-out, transform .5s ease-in-out;
+  }
+
+  .fade-in-enter-to {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>

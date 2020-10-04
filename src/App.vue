@@ -44,6 +44,11 @@ export default {
   font-family: 'Lato', sans-serif;
 }
 
+*:focus {
+  outline: none;
+  box-shadow: 0 0 2px 1px #454545;
+}
+
 body {
   min-width: 320px;
   background-color: #f0f0f0;

@@ -134,15 +134,20 @@ export default {
     }
 
     .slogan {
-      margin-bottom: 35px;
+      margin: 0 155px 35px 155px;
       color: #000;
       text-transform: uppercase;
       text-align: center;
       font-size: 36px;
       font-weight: 300;
 
+      @include media-xl {
+        margin: 0 100px 35px 100px;
+      }
+
       @include media-md {
         font-size: 30px;
+        margin: 0 0 35px 0;
       }
     }
 

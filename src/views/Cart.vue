@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div v-if="!cartEmpty" class="order-info">
       <p class="total">Total Price: <span class="price-value">${{ totalPrice }}</span></p>
-      <ul class="order-list">
+      <transition-group tag="ul" name="fade-in" appear class="order-list">
         <li
           v-for="product in cart"
           :key="product.id"
@@ -28,7 +28,7 @@
             </svg>
           </button>
         </li>
-      </ul>
+      </transition-group>
       <button class="btn btn-order-now">Order Now</button>
     </div>
     <p v-if="cartEmpty" class="cart-empty">Cart Is Empty</p>
@@ -164,6 +164,11 @@ export default {
             font-size: 30px;
             font-weight: 300;
             text-transform: uppercase;
+            transition: color .1s ease-in-out;
+
+            &:hover {
+              color: #0023ff;
+            }
 
             @include media-md {
               position: absolute;
@@ -270,10 +275,24 @@ export default {
     }
 
     .cart-empty {
-      color: #000;
+      color: #d8d8d8;
       font-size: 30px;
-      font-weight: bold;
+      font-weight: 900;
       text-align: center;
     }
+  }
+
+  .fade-in-enter {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .fade-in-enter-active {
+    transition: opacity .5s ease-in-out, transform .5s ease-in-out;
+  }
+
+  .fade-in-enter-to {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
