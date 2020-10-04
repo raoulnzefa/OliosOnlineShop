@@ -1,24 +1,9 @@
-# olios
+# Olios - online shop
 
-## Project setup
-```
-npm install
-```
+Olios - online shop Single Page Application (Vue v2.x)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![Olios preview](src/assets/img/OliosPreview.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# License
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+MIT License (MIT) - (c) 2020 Yury Prymak
