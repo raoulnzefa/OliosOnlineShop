@@ -96,6 +96,23 @@ export default new Vuex.Store({
         return recommendedProducts.slice(0, 3);
       };
     },
+    productMatch(state) {
+      return id => {
+        let productMatch = false;
+
+        state.categories.forEach(category => {
+          category.products.forEach(product => {
+            const match = product.id === +id;
+
+            if(match) {
+              productMatch = true;
+            }
+          });
+        });
+
+        return productMatch;
+      };
+    },
     productInCart(state) {
       return id => state.cart.filter(product => product.id === id)[0];
     },

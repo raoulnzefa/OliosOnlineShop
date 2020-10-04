@@ -5,6 +5,7 @@ import Cart from '../views/Cart.vue';
 import Search from '../views/Search.vue';
 import Products from '../views/Products.vue';
 import Product from '../views/Product.vue';
+import PageNotFound from '../views/404.vue';
 
 Vue.use(VueRouter);
 
@@ -35,8 +36,13 @@ const routes = [
     component: Product
   },
   {
+    path: '/404',
+    name: 'Page Not Found',
+    component: PageNotFound
+  },
+  {
     path: '*',
-    redirect: '/'
+    redirect: '/404'
   }
 ];
 

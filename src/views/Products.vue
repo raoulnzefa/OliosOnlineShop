@@ -39,6 +39,7 @@ export default {
     ...mapGetters([
       'productsList',
       'categoryIconName',
+      'categoriesInfo'
     ]),
     visibleProductList() {
       return this.productsList(this.categoryName).products.slice(0, this.visibleProducts);
@@ -84,9 +85,18 @@ export default {
       }
     }
   },
+  created() {
+    const categoryMatch = this.categoriesInfo
+      .filter(category => category.name === this.categoryName);
+
+    if(categoryMatch.length === 0) {
+      this.$router.push('/404');
+    }
+  },
   mounted() {
     const { scrollHeight, offsetHeight } = this.$refs.categoriesWrapper;
     const noScroll = scrollHeight === offsetHeight;
+
     if(noScroll) {
       this.loadProducts();
     }

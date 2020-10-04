@@ -40,7 +40,9 @@ export default {
   computed: {
     ...mapGetters([
       'product',
-      'categoryIconName'
+      'categoryIconName',
+      'categoriesInfo',
+      'productMatch'
     ]),
     categoryName() {
       return this.$route.params.category.replace(/-/g, ' ');
@@ -57,6 +59,16 @@ export default {
       if(from.path !== to.path) {
         this.$refs.infoWrapper.scrollTo(0, 0);
       }
+    }
+  },
+  created() {
+    const categoryMatch = this.categoriesInfo
+      .filter(category => category.name === this.categoryName);
+
+    const productMatch = this.productMatch(this.$route.params.id);
+
+    if(categoryMatch.length === 0 || !productMatch) {
+      this.$router.push('/404');
     }
   },
 };
