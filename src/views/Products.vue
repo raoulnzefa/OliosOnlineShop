@@ -24,7 +24,7 @@ import { mapGetters } from 'vuex';
 import ProductCard from '@/components/ProductCard.vue';
 
 export default {
-  name: 'Categories',
+  name: 'Products',
   components: {
     ProductCard
   },

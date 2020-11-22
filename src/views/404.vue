@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'Cart',
+  name: '404',
 };
 </script>
 
