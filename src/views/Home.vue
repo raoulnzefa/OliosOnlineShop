@@ -77,13 +77,13 @@ export default {
   .main {
     width: 100%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    padding: 150px 10px 0 10px;
+    padding: 0 10px;
     background: url('../assets/img/home-bg.png') center bottom / cover no-repeat;
-
-    @include media-xl {
-      padding-top: 70px;
-    }
 
     .bg-text {
       position: absolute;
@@ -94,6 +94,11 @@ export default {
       font-size: 300px;
       font-weight: 900;
       transform: translateX(-50%);
+
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
 
       @include media-xl {
         font-size: 200px;
