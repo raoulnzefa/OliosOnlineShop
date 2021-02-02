@@ -153,6 +153,11 @@ export default {
             background-color: #0621d1;
             color: #fff;
             font-weight: bold;
+
+            @include media-md {
+              top: 10%;
+              left: 50%;
+            }
           }
         }
       }
