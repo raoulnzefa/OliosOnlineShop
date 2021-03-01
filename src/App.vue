@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import 'focus-visible';
+
 import { mapActions } from 'vuex';
 
 import Navigation from '@/components/Navigation.vue';
@@ -44,7 +46,11 @@ export default {
   font-family: 'Lato', sans-serif;
 }
 
-*:focus {
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+.js-focus-visible .focus-visible {
   outline: none;
   box-shadow: 0 0 2px 1px #454545;
 }
