@@ -3,7 +3,8 @@
     <button
       @click="showCategoriesNav()"
       ref="btnShowNav"
-      class="btn btn-show-nav">
+      class="btn btn-show-nav"
+      aria-label="Toggle categories menu">
     </button>
     <transition name="slide">
       <div
@@ -125,7 +126,6 @@ export default {
 
   .btn-show-nav {
     background: url('../assets/img/hamburger-nav-icon.png') center no-repeat, #fff;
-
   }
 
   .btn-hide-nav {
@@ -145,6 +145,7 @@ export default {
   .nav-categories-wrapper {
     width: 370px;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background-color: #fff;
     position: absolute;
     top: 0;

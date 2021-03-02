@@ -103,6 +103,7 @@ export default {
   .wrapper {
     width: 100%;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     padding: 80px 160px 100px 185px;
     background-image: linear-gradient(
       rgba(255, 255, 255, .9),

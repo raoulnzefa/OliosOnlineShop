@@ -25,6 +25,11 @@ export default {
   },
   created() {
     this.loadData();
+    this.calcVh();
+
+    window.addEventListener('resize', () => {
+      this.calcVh();
+    });
   },
   methods: {
     ...mapActions([
@@ -32,6 +37,10 @@ export default {
       'hideCategoriesNav',
       'loadData'
     ]),
+    calcVh() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
   }
 };
 </script>
@@ -58,6 +67,7 @@ export default {
 body {
   min-width: 320px;
   background-color: #f0f0f0;
+  overflow: hidden;
 }
 
 ul {

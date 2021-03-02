@@ -11,16 +11,19 @@ export default new Vuex.Store({
     nav: [
       {
         url: '/',
+        title: 'Home',
         iconName: 'nav/home.png',
         activeLinkIconName: 'nav/home-active.png'
       },
       {
         url: '/cart',
+        title: 'Cart',
         iconName: 'nav/cart.png',
         activeLinkIconName: 'nav/cart-active.png'
       },
       {
         url: '/search',
+        title: 'Search',
         iconName: 'nav/search.png',
         activeLinkIconName: 'nav/search-active.png'
       }

@@ -80,6 +80,7 @@ export default {
   .wrapper {
     width: 100vw;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     padding-left: 145px;
     overflow: hidden;
@@ -157,8 +158,6 @@ export default {
 
     .info-wrapper {
       width: 60%;
-      display: flex;
-      flex-direction: column;
       overflow-y: auto;
       overflow-x: hidden;
 
@@ -206,7 +205,7 @@ export default {
         }
 
         .category {
-          height: 90%;
+          height: 80px;
           position: relative;
           padding-right: 130px;
           line-height: 80px;
@@ -228,10 +227,6 @@ export default {
             top: 50%;
             right: 40px;
             transform: translateY(-50%);
-
-            @media screen and (max-width: 1600px) {
-              top: 32%;
-            }
 
             @include media-sm {
               right: 0;

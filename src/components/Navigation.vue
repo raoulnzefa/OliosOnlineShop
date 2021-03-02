@@ -11,7 +11,7 @@
           :to="link.url"
           tag="li"
         >
-          <a class="link">
+          <a class="link" :aria-label="link.title">
             <img
               :src="require(`../assets/img/${navIcon(link)}`)"
               alt="Icon"
@@ -55,6 +55,7 @@ export default {
   .nav-wrapper {
     width: 145px;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,7 +77,7 @@ export default {
     }
 
     .logo {
-      margin: 35px 0 110px 0;
+      margin-top: 35px;
 
       @include media-md {
         margin: 0 0 0 10px;
@@ -86,10 +87,14 @@ export default {
         display: none;
       }
 
+      @media screen and (max-height: 450px) {
+        display: none;
+      }
     }
 
     .nav {
       width: 100%;
+      height: 100%;
 
       @include media-md {
         width: auto;
@@ -101,8 +106,13 @@ export default {
       }
 
       ul {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
         @include media-md {
-          display: flex;
+          flex-direction: row;
         }
 
         .link {

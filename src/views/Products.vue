@@ -58,7 +58,7 @@ export default {
     loadProducts() {
       const { scrollHeight, scrollTop } = this.$refs.categoriesWrapper;
       const { clientHeight } = document.documentElement;
-      const scrollIsBottom = scrollHeight - scrollTop - 10 <= clientHeight;
+      const scrollIsBottom = scrollHeight - scrollTop - 100 <= clientHeight;
       const haveProducts = this.visibleProducts <= this.productsList(this.categoryName)
         .products.length;
       const loadProductsCondition = scrollIsBottom && haveProducts;
@@ -109,6 +109,7 @@ export default {
 
   .wrapper {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     padding: 80px 40px 100px 185px;
     overflow: auto;
 

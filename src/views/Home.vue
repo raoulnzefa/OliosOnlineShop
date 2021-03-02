@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <p class="bg-text">Newest</p>
     <h1 class="title">Olios</h1>
     <transition-group name="slogan" appear tag="p">
       <p
@@ -14,11 +13,12 @@
     </transition-group>
     <router-link :to="firstCategory" tag="button" class="btn btn-view-more">View More</router-link>
     <ul class="dots">
-      <li v-for="num in slogans.length" :key="num">
+      <li v-for="(num, i) in slogans.length" :key="num">
         <button
           @click="changeSlogan(num - 1)"
           :class="{'active-dot': currentSlogan === num - 1}"
           class="dot"
+          :aria-label="`Slogan ${i}`"
         ></button>
       </li>
     </ul>
@@ -77,64 +77,43 @@ export default {
   .main {
     width: 100%;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 0 10px;
+    padding: 10px;
     background: url('../assets/img/home-bg.png') center bottom / cover no-repeat;
-
-    .bg-text {
-      position: absolute;
-      top: 75px;
-      left: 50%;
-      color: rgba(231, 231, 231, 0.7);
-      text-transform: uppercase;
-      font-size: 300px;
-      font-weight: 900;
-      transform: translateX(-50%);
-
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-
-      @include media-xl {
-        font-size: 200px;
-      }
-
-      @include media-lg {
-        font-size: 150px;
-      }
-
-      @include media-md {
-        font-size: 100px;
-      }
-
-      @include media-sm {
-        display: none;
-      }
-    }
 
     .title {
       position: relative;
+      margin-bottom: 50px;
       color: #000;
       text-transform: uppercase;
       text-align: center;
       font-size: 220px;
       font-weight: 100;
+      line-height: .8;
 
       @include media-lg {
-        font-size: 180px;
+        margin-bottom: 40px;
+        font-size: 160px;
       }
 
       @include media-md {
-        font-size: 120px;
+        margin-bottom: 30px;
+        font-size: 100px;
       }
 
       @include media-xs {
+        margin-bottom: 20px;
         font-size: 90px;
+      }
+
+      @media screen and (max-height: 500px) {
+        margin-bottom: 10px;
+        font-size: 100px;
       }
     }
 
@@ -154,11 +133,16 @@ export default {
         font-size: 30px;
         margin: 0 0 35px 0;
       }
+
+      @media screen and (max-height: 500px) {
+        margin: 0 100px 10px 100px;
+      }
     }
 
     .btn-view-more {
       width: 215px;
       height: 55px;
+      flex-shrink: 0;
       display: block;
       position: relative;
       margin: 0 auto;
@@ -196,6 +180,14 @@ export default {
       li {
         &:not(:last-child) {
           margin-right: 45px;
+
+          @media screen and (max-height: 500px) {
+            margin-right: 20px;
+          }
+
+          @include media-md {
+            margin-right: 20px;
+          }
         }
       }
 

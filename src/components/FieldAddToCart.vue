@@ -7,6 +7,7 @@
     </p>
     <p v-if="productInfo.discountPercent !== 0" class="full-price">{{ productInfo.price }}</p>
     <div class="quantity-input-wrapper">
+      <label class="label" for="quantity">Quantity</label>
       <input
         @input="validate"
         @blur="notEmpty"
@@ -15,6 +16,7 @@
         min="1"
         max="99"
         class="quantity"
+        id="quantity"
       >
     </div>
     <div class="btn-add-to-cart-wrapper">
@@ -168,14 +170,14 @@ export default {
         margin: 0;
       }
 
-      &::before {
-        content: 'QUANTITY';
+      .label {
         position: absolute;
         top: -40px;
         left: 30px;
         color: #000;
         font-size: 18px;
         font-weight: 300;
+        text-transform: uppercase;
 
         @include media-sm {
           top: -30px;
